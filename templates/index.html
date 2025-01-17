@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Llama 3.2 Chat</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #f5f7fa, #c3cfe2);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .chat-container {
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            overflow: hidden;
+        }
+        h1 {
+            text-align: center;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: #ffffff;
+            margin: 0;
+            padding: 20px 0;
+            font-size: 24px;
+        }
+
+        /* Form Styling */
+        form {
+            display: flex;
+            border-top: 1px solid #f0f0f0;
+            padding: 10px;
+            background: #f9f9f9;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s ease;
+        }
+        input[type="text"]:focus {
+            border-color: #2575fc;
+        }
+        button {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            border: none;
+            color: #ffffff;
+            padding: 10px 20px;
+            margin-left: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.2s ease, background 0.3s ease;
+        }
+        button:hover {
+            background: linear-gradient(to right, #2575fc, #6a11cb);
+            transform: scale(1.05);
+        }
+
+        /* Chat Box */
+        .chat-box {
+            padding: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        .chat-box::-webkit-scrollbar {
+            width: 6px;
+        }
+        .chat-box::-webkit-scrollbar-thumb {
+            background: #ddd;
+            border-radius: 10px;
+        }
+        .chat-box::-webkit-scrollbar-thumb:hover {
+            background: #bbb;
+        }
+
+        /* Messages */
+        .message {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        .message.user {
+            align-items: flex-end;
+        }
+        .message.assistant {
+            align-items: flex-start;
+        }
+        .message .role {
+            font-weight: bold;
+            padding: 5px 10px;
+            border-radius: 12px;
+            max-width: 75%;
+        }
+        .message.user .role {
+            background: #6a11cb;
+            color: #ffffff;
+            text-align: right;
+        }
+        .message.assistant .role {
+            background: #f0f0f0;
+            color: #555;
+            text-align: left;
+        }
+        .message .text {
+            margin-top: 5px;
+            padding: 10px;
+            border-radius: 8px;
+            font-size: 14px;
+            max-width: 75%;
+        }
+        .message.user .text {
+            background: #6a11cb;
+            color: #ffffff;
+            text-align: right;
+        }
+        .message.assistant .text {
+            background: #f0f0f0;
+            color: #555;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <h1>Llama 3.2 Chat</h1>
+        <div class="chat-box">
+            {% for message in messages %}
+                <div class="message {{ message.role }}">
+                    <div class="role">{{ message.role.capitalize() }}</div>
+                    <div class="text">{{ message.content }}</div>
+                </div>
+            {% endfor %}
+        </div>
+        <form method="POST">
+            <input type="text" name="user_input" placeholder="Type your message..." required>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+</body>
+</html>
